@@ -50,6 +50,7 @@ const EthCrypto = require('eth-crypto');
 - [sign()](#sign)
 - [recover()](#recover)
 - [recoverPublicKey()](#recoverpublickey)
+- [vrs()](#vrs)
 - [encryptWithPublicKey()](#encryptwithpublickey)
 - [decryptWithPrivateKey()](#decryptwithprivatekey)
 - [cipher.stringify()](#cipherstringify)
@@ -164,6 +165,28 @@ Recovers the signers `publicKey` from the signature.
   // > 'bf1cc3154424dc22191941d9f4f50b063a2b663a2337e5548abea633c1d06ece..'
 ```
 
+### vrs()
+Breaks the signature down into `v`, `r` and `s` values
+```javascript
+    const vrs = EthCrypto.vrs.fromString('0xcb6cf92dc73dc6...'); // signature
+  // > { v: '0x1b',
+  r:
+   '0xcb6cf92dc7...',
+  s:
+   '0x31c4d19fd3...' }
+   
+```
+Merging `v,` `r` and `s` to a signature is also possible:
+```javascript
+    vrs = { v: '0x1b',
+  r:
+   '0xcb6cf92dc7...',
+  s:
+   '0x31c4d19fd3...' }
+    const signature = EthCrypto.vrs.toString(vrs); // array consisting of v,r and s
+  // > '0xcb6cf92dc73dc651aad64e24a53....' // signature
+   
+```
 
 ### encryptWithPublicKey()
 
